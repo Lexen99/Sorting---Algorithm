@@ -1,0 +1,20 @@
+:root {
+  --primary-color: #032030;
+  --secondary-color: #022b42;
+  --accent-color: #003554;
+  --text-color: #006494;
+  --light-color: #006da4;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--primary-color);
+  font-family: "Titillium Web", sans-serif;
+}
+
+
