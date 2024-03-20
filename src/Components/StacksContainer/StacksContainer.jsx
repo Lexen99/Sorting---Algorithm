@@ -5,26 +5,23 @@ const StacksContainer = ({ arraySize }) => {
   // state variabel som förvarar stack heights
   const [stackHeights, setStackHeights] = useState([]);
 
-  // Funktion för att generera en array med olika höjder på stacksen
+  // Funktion för att generera en array med olika höjder på stacksen baserat på arraySize, från 1 - Arraysize i procent
   const generateRandomStackHeights = (size) => {
-    const heights = [];
-    for(let i = 0; i < size; i++) {
-      const heightPercentage = ((i + 1) / size) * 100;
-      heights.push(Math.ceil(heightPercentage));
-    }
-    shuffleArray(heights);
-    return heights;
-  }
+    const heights = Array.from({ length: size}, (_, index) => index + 1);
+    const shuffledHeights = shuffleArray(heights);
+    console.log(shuffledHeights)
+    return shuffledHeights;
+  };
 
   // Funktion for att shuffle:a array
   const shuffleArray = (array) => {
-    const newArray = [...array]
-    for(let i = newArray.length - 1; i > 0; i--) {
+    const newArray = [...array];
+    for (let i = newArray.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
     }
     return newArray;
-  }
+  };
 
   // uppdaterar stack heights när arraySize propen ändras
   useEffect(() => {
@@ -36,7 +33,11 @@ const StacksContainer = ({ arraySize }) => {
   // Logik för att rendera antalet stacks från stackHeights arrayen
   const renderStacks = () => {
     return stackHeights.map((height, i) => (
-      <div key={i} className="stack" style={{ height: `${i + 1}%` }}></div>
+      <div
+        key={i}
+        className="stack"
+        style={{ height: `${height}%` }}
+      ></div>
     ));
   };
 
