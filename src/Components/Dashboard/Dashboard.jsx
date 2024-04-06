@@ -1,10 +1,11 @@
 import "./Dashboard.css";
 import { useState, useEffect } from "react";
 import StacksContainer from "../StacksContainer/StacksContainer";
+import GenButton from "../GenButton/GenButton";
 
 const Dashboard = () => {
   const [speed, setSpeed] = useState(50);
-  const [arraySize, setArraySize] = useState(50);
+  const [array, setArray] = useState(50);
 
   return (
     <main>
@@ -18,12 +19,12 @@ const Dashboard = () => {
             type="range"
             min={1}
             max={100}
-            value={arraySize}
+            value={array}
             id="array-size"
-            onChange={(e) => setArraySize(e.target.value)}
+            onChange={(e) => setArray(e.target.value)}
           />
           <span className="label-text" id="arr-length">
-            {arraySize}
+            {array}
           </span>
         </div>
         <div>
@@ -43,13 +44,13 @@ const Dashboard = () => {
             {`${speed}ms`}
           </span>
         </div>
-        <button className="btn">Gen</button>
+        <GenButton array={array} setArray={setArray}/>
         <button className="btn">Bubble</button>
         <button className="btn">Quick</button>
         <button className="btn">Selection Sort</button>
       </nav>
 
-      <StacksContainer arraySize={arraySize} />
+      <StacksContainer array={array} />
     </main>
   );
 };
