@@ -1,11 +1,17 @@
 import "./Dashboard.css";
 import { useState, useEffect } from "react";
 import StacksContainer from "../StacksContainer/StacksContainer";
-import GenButton from "../GenButton/GenButton";
+import Shuffle from "../Shuffle/Shuffle";
 
 const Dashboard = () => {
   const [speed, setSpeed] = useState(50);
-  const [array, setArray] = useState(50);
+  const [arraySize, setArraySize] = useState(50);
+  const [array, setArray] = useState(Array.from({ length: 50 }, (_, index) => index + 1));
+  
+  // Uppdaterar array när arraySize ändras
+  useEffect(() => {
+    setArray(Array.from({ length: arraySize }, (_, index) => index + 1));
+  }, [arraySize]);
 
   return (
     <main>
@@ -19,12 +25,12 @@ const Dashboard = () => {
             type="range"
             min={1}
             max={100}
-            value={array}
+            value={arraySize}
             id="array-size"
-            onChange={(e) => setArray(e.target.value)}
+            onChange={(e) => setArraySize(parseInt(e.target.value))}
           />
           <span className="label-text" id="arr-length">
-            {array}
+            {arraySize}
           </span>
         </div>
         <div>
@@ -44,7 +50,7 @@ const Dashboard = () => {
             {`${speed}ms`}
           </span>
         </div>
-        <GenButton array={array} setArray={setArray}/>
+        <Shuffle arraySize={arraySize} setArray={setArray} />
         <button className="btn">Bubble</button>
         <button className="btn">Quick</button>
         <button className="btn">Selection Sort</button>
