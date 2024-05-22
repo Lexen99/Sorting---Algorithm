@@ -1,31 +1,22 @@
 import "./StacksContainer.css";
 import { useEffect, useState } from "react";
 
-// Funktioner från utils.js
-import { shuffleArray } from "../../utils";
-
-const StacksContainer = ({ array }) => {
-  // state variabel som förvarar stack heights
+const StacksContainer = ({ array, currentIndices }) => {
   const [stackHeights, setStackHeights] = useState([]);
 
-  // Funktion för att generera en array med olika höjder på stacksen baserat på array, från 1 - array
-  const generateRandomStackHeights = (size) => {
-    const heights = Array.from({ length: size }, (_, index) => index + 1);
-    const shuffledHeights = shuffleArray(heights);
-    console.log(shuffledHeights);
-    return shuffledHeights;
-  };
-
-  // uppdaterar stack heights när array propen ändras
+  // uppdaterar stack heights när array proppen ändras
   useEffect(() => {
-      const newStackHeights = generateRandomStackHeights(array.length);
-      setStackHeights(newStackHeights);
+    setStackHeights(array);
   }, [array]);
 
-  // Logik för att rendera antalet stacks från stackHeights arrayen
+  // Renderar stacks:en och färgar de aktuella indexen röda
   const renderStacks = () => {
     return stackHeights.map((height, i) => (
-      <div key={i} className="stack" style={{ height: `${height}%` }}></div>
+      <div
+        key={i}
+        className={`stack ${currentIndices.includes(i) ? "red" : ""}`}
+        style={{ height: `${height}%` }}
+      ></div>
     ));
   };
 

@@ -2,12 +2,17 @@ import "./Dashboard.css";
 import { useState, useEffect } from "react";
 import StacksContainer from "../StacksContainer/StacksContainer";
 import Shuffle from "../Shuffle/Shuffle";
+import BubbleSortButton from "../BubbleSortButton/BubbleSortButton";
+import { shuffleArray } from "../../utils";
 
 const Dashboard = () => {
   const [speed, setSpeed] = useState(50);
   const [arraySize, setArraySize] = useState(50);
-  const [array, setArray] = useState(Array.from({ length: 50 }, (_, index) => index + 1));
-  
+  const [array, setArray] = useState(
+    Array.from({ length: 50 }, (_, index) => index + 1)
+  );
+  const [currentIndices, setCurrentIndices] = useState([]);
+
   // Uppdaterar array när arraySize ändras
   useEffect(() => {
     setArray(Array.from({ length: arraySize }, (_, index) => index + 1));
@@ -51,12 +56,22 @@ const Dashboard = () => {
           </span>
         </div>
         <Shuffle arraySize={arraySize} setArray={setArray} />
-        <button className="btn">Bubble</button>
+        <BubbleSortButton
+          array={array}
+          setArray={setArray}
+          speed={speed}
+          setCurrentIndices={setCurrentIndices}
+        >
+          Bubble
+        </BubbleSortButton>
         <button className="btn">Quick</button>
         <button className="btn">Selection Sort</button>
       </nav>
 
-      <StacksContainer array={array} />
+      <StacksContainer
+        array={array}
+        currentIndices={currentIndices}
+      />
     </main>
   );
 };
