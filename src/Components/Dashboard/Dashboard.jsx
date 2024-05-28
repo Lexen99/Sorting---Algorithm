@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import StacksContainer from "../StacksContainer/StacksContainer";
 import Shuffle from "../Shuffle/Shuffle";
 import BubbleSortButton from "../BubbleSortButton/BubbleSortButton";
-import { shuffleArray } from "../../utils";
 
 const Dashboard = () => {
   const [speed, setSpeed] = useState(50);
@@ -12,6 +11,7 @@ const Dashboard = () => {
     Array.from({ length: 50 }, (_, index) => index + 1)
   );
   const [currentIndices, setCurrentIndices] = useState([]);
+  const [highlightedIndex, setHighlightedIndex] = useState(null);
 
   // Uppdaterar array när arraySize ändras
   useEffect(() => {
@@ -49,7 +49,7 @@ const Dashboard = () => {
             max={100}
             value={speed}
             id="speed"
-            onChange={(e) => setSpeed(e.target.value)}
+            onChange={(e) => setSpeed(parseInt(e.target.value))}
           />
           <span className="label-text" id="speed">
             {`${speed}ms`}
@@ -61,6 +61,7 @@ const Dashboard = () => {
           setArray={setArray}
           speed={speed}
           setCurrentIndices={setCurrentIndices}
+          setHighlightedIndex={setHighlightedIndex}
         >
           Bubble
         </BubbleSortButton>
@@ -71,6 +72,7 @@ const Dashboard = () => {
       <StacksContainer
         array={array}
         currentIndices={currentIndices}
+        highlightedIndex={highlightedIndex}
       />
     </main>
   );

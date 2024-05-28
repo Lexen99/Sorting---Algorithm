@@ -1,7 +1,7 @@
 import "./StacksContainer.css";
 import { useEffect, useState } from "react";
 
-const StacksContainer = ({ array, currentIndices }) => {
+const StacksContainer = ({ array, currentIndices, highlightedIndex }) => {
   const [stackHeights, setStackHeights] = useState([]);
 
   // uppdaterar stack heights när array proppen ändras
@@ -14,7 +14,7 @@ const StacksContainer = ({ array, currentIndices }) => {
     return stackHeights.map((height, i) => (
       <div
         key={i}
-        className={`stack ${currentIndices.includes(i) ? "red" : ""}`}
+        className={`stack ${currentIndices.includes(i) ? "red" : ""} ${highlightedIndex === i ? "yellow" : ""}`}
         style={{ height: `${height}%` }}
       ></div>
     ));
