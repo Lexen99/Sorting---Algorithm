@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import StacksContainer from "../StacksContainer/StacksContainer";
 import Shuffle from "../Shuffle/Shuffle";
 import BubbleSortButton from "../BubbleSortButton/BubbleSortButton";
+import QuickSortButton from "../QuickSortButton/QuickSortButton";
 
 const Dashboard = () => {
   const [speed, setSpeed] = useState(50);
@@ -63,9 +64,14 @@ const Dashboard = () => {
           setCurrentIndices={setCurrentIndices}
           setHighlightedIndex={setHighlightedIndex}
         >
-          Bubble
         </BubbleSortButton>
-        <button className="btn">Quick</button>
+        <QuickSortButton
+          array={array}
+          speed={speed}
+          setArray={setArray}
+          setCurrentIndices={setCurrentIndices}
+        >
+        </QuickSortButton>
         <button className="btn">Selection Sort</button>
       </nav>
 
